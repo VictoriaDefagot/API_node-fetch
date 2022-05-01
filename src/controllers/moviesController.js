@@ -6,7 +6,6 @@ const moment = require('moment');
 const fetch = require('node-fetch');
 
 
-//Aqui tienen otra forma de llamar a cada uno de los modelos
 const Movies = db.Movie;
 const Genres = db.Genre;
 const Actors = db.Actor;
@@ -55,11 +54,56 @@ const moviesController = {
                 res.render('recommendedMovies.ejs', {movies});
             });
     },
-    //Aqui debo modificar para crear la funcionalidad requerida
-    'buscar': (req, res) => {
+    'search': async (req, res) => {
+        let title = req.body.titulo;
+    
+        if(title.trim() === ''){
+            res.send('The movie title is required');
+        }
+
+        const movie = await db.Movie.findOne({
+                                where: {
+                                    title: title
+                                }   
+        });
+
+        if(movie){
+            return res.render('moviesDetail', {movie:movie})
+        } else {
+            try {
+                const response = await fetch('http://www.omdbapi.com/?apikey=9968b4e2&t=' + title);
+                const movie = await response.json();
+                return res.render('moviesDetailOmdb', {movie:movie});
+            } catch {
+                return res.send('Something went wrong');
+            }
+        }
         
+        /*
+        findOne => {} o null
+        findAll => [{}] o []
+
+        db.Movie.findOne({
+            where : {
+                title : title
+            }
+        }).then(movie => {
+            if(movie){
+                return res.render('moviesDetail',{movie});
+            } else {
+                fetch('http://www.omdbapi.com/?apikey=9968b4e2&t=' + title)
+                    .then(res => res.json())
+                    .then(movie => {
+                        console.log(movie);
+                    return res.render('moviesDetailOmdb', {movie});
+                    })
+                    .catch(err => {
+                        res.send('Something went wrong');
+                    })
+            }
+        })
+        */
     },
-    //Aqui dispongo las rutas para trabajar con el CRUD
     add: function (req, res) {
         let promGenres = Genres.findAll();
         let promActors = Actors.findAll();

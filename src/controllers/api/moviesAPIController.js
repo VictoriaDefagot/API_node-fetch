@@ -5,7 +5,6 @@ const { Op } = require("sequelize");
 const moment = require('moment');
 
 
-//Aqui tienen otra forma de llamar a cada uno de los modelos
 const Movies = db.Movie;
 const Genres = db.Genre;
 const Actors = db.Actor;
@@ -90,7 +89,7 @@ const moviesAPIController = {
                         total: confirm.length,
                         url: 'api/movies/create'
                     },
-                    data:confirm
+                    data: confirm
                 }
             }else{
                 respuesta ={
@@ -99,7 +98,7 @@ const moviesAPIController = {
                         total: confirm.length,
                         url: 'api/movies/create'
                     },
-                    data:confirm
+                    data: confirm
                 }
             }
             res.json(respuesta);
@@ -129,7 +128,7 @@ const moviesAPIController = {
                         total: confirm.length,
                         url: 'api/movies/update/:id'
                     },
-                    data:confirm
+                    data: confirm
                 }
             }else{
                 respuesta ={
@@ -138,7 +137,7 @@ const moviesAPIController = {
                         total: confirm.length,
                         url: 'api/movies/update/:id'
                     },
-                    data:confirm
+                    data: confirm
                 }
             }
             res.json(respuesta);
@@ -158,7 +157,7 @@ const moviesAPIController = {
                         total: confirm.length,
                         url: 'api/movies/destroy/:id'
                     },
-                    data:confirm
+                    data: confirm
                 }
             }else{
                 respuesta ={
@@ -167,7 +166,7 @@ const moviesAPIController = {
                         total: confirm.length,
                         url: 'api/movies/destroy/:id'
                     },
-                    data:confirm
+                    data: confirm
                 }
             }
             res.json(respuesta);

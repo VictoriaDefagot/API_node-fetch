@@ -5,13 +5,11 @@ const { Op } = require("sequelize");
 const moment = require('moment');
 
 
-//Aqui tienen otra forma de llamar a cada uno de los modelos
 const Movies = db.Movie;
 const Genres = db.Genre;
 const Actors = db.Actor;
-//---------------------------
-//Dentro del actorsAPIController uso las dos forma de poder llamar a nuestros modelo
-//----------------------------------
+
+
 const actorsAPIController = {
     'list': (req, res) => {
         db.Actor.findAll()
@@ -77,16 +75,16 @@ const actorsAPIController = {
                         total: confirm.length,
                         url: 'api/actors/create'
                     },
-                    data:confirm
+                    data: confirm
                 }
-            }else{
+            } else{
                 respuesta ={
                     meta: {
                         status: 200,
                         total: confirm.length,
                         url: 'api/actors/create'
                     },
-                    data:confirm
+                    data: confirm
                 }
             }
             res.json(respuesta);
@@ -114,7 +112,7 @@ const actorsAPIController = {
                         total: confirm.length,
                         url: 'api/actors/update/:id'
                     },
-                    data:confirm
+                    data: confirm
                 }
             }else{
                 respuesta ={
@@ -123,7 +121,7 @@ const actorsAPIController = {
                         total: confirm.length,
                         url: 'api/actors/update/:id'
                     },
-                    data:confirm
+                    data: confirm
                 }
             }
             res.json(respuesta);
@@ -143,7 +141,7 @@ const actorsAPIController = {
                         total: confirm.length,
                         url: 'api/actors/delete/:id'
                     },
-                    data:confirm
+                    data: confirm
                 }
             }else{
                 respuesta ={
@@ -152,7 +150,7 @@ const actorsAPIController = {
                         total: confirm.length,
                         url: 'api/actors/delete/:id'
                     },
-                    data:confirm
+                    data: confirm
                 }
             }
             res.json(respuesta);
